@@ -1,0 +1,35 @@
+[
+{
+  "model": "books.author",
+  "pk": 1,
+  "fields": {
+    "created": null,
+    "updated": null,
+    "name": "Александр",
+    "last_name": "Пушкин",
+    "photo": "avatars/d3ff78bc-79d9-4077-8ba7-067c6a981655.jpeg"
+  }
+},
+{
+  "model": "books.author",
+  "pk": 2,
+  "fields": {
+    "created": null,
+    "updated": null,
+    "name": "Владимир",
+    "last_name": "Маяковский",
+    "photo": "avatars/7b840d43-79f2-4cf7-8cb9-6197fa19df00.jpeg"
+  }
+},
+{
+  "model": "books.author",
+  "pk": 3,
+  "fields": {
+    "created": null,
+    "updated": null,
+    "name": "Михаил",
+    "last_name": "Лермонтов",
+    "photo": "avatars/IMG_0057.jpeg"
+  }
+}
+]

@@ -1,0 +1,54 @@
+[
+{
+  "model": "books.readers",
+  "pk": 1,
+  "fields": {
+    "created": null,
+    "updated": null,
+    "username": "Петр",
+    "last_name": "Петров",
+    "phone": "+79035556677",
+    "is_active": true,
+    "books": 1
+  }
+},
+{
+  "model": "books.readers",
+  "pk": 2,
+  "fields": {
+    "created": null,
+    "updated": null,
+    "username": "Светлана",
+    "last_name": "Петрова",
+    "phone": "+79996668998",
+    "is_active": true,
+    "books": 4
+  }
+},
+{
+  "model": "books.readers",
+  "pk": 3,
+  "fields": {
+    "created": null,
+    "updated": null,
+    "username": "Иван",
+    "last_name": "Иванов",
+    "phone": "+79015436776",
+    "is_active": true,
+    "books": 2
+  }
+},
+{
+  "model": "books.readers",
+  "pk": 7,
+  "fields": {
+    "created": null,
+    "updated": null,
+    "username": "Иван",
+    "last_name": "Сергеев",
+    "phone": "+79015436775",
+    "is_active": true,
+    "books": 1
+  }
+}
+]

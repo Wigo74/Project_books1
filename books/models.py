@@ -1,8 +1,23 @@
 from django.db import models
+from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 
 
-class Author(models.Model):
+class DatesModelMixin(models.Model):
+    class Meta:
+        abstract = True
+
+    created = models.DateTimeField(verbose_name="Дата создания", null=True)
+    updated = models.DateTimeField(verbose_name="Дата последнего обновления", null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.created = timezone.now()
+        self.updated = timezone.now()
+        return super().save(*args, **kwargs)
+
+
+class Author(DatesModelMixin):
     class Meta:
         verbose_name = 'Автор'
         verbose_name_plural = 'Авторы'
@@ -10,14 +25,12 @@ class Author(models.Model):
     name = models.TextField(max_length=50, verbose_name='Имя')
     last_name = models.TextField(max_length=50, verbose_name='Фамилия')
     photo = models.ImageField(upload_to='avatars/', null=True, blank=True)
-    is_creation = models.DateField(auto_now_add=True, verbose_name='Дата создания')
-    is_editing = models.DateField(auto_now_add=True, verbose_name='Дата редактирования')
 
     def __str__(self):
         return self.name
 
 
-class Books(models.Model):
+class Books(DatesModelMixin):
     class Meta:
         verbose_name = 'Книга'
         verbose_name_plural = 'Книги'
@@ -27,22 +40,18 @@ class Books(models.Model):
     number_of_pages = models.PositiveIntegerField(verbose_name='Количество страниц')
     author = models.ForeignKey(Author, on_delete=models.PROTECT, verbose_name='Автор')
     books = models.PositiveIntegerField(verbose_name='Кол-во книг в библиотеке')
-    is_creation = models.DateField(auto_now_add=True, verbose_name='Дата создания')
-    is_editing = models.DateField(auto_now_add=True, verbose_name='Дата редактирования')
 
     def __str__(self):
         return self.title
 
 
-class Readers(models.Model):
+class Readers(DatesModelMixin):
     username = models.CharField(max_length=64, verbose_name="Имя")
     last_name = models.CharField(max_length=64, verbose_name="Фамилия")
     phone = PhoneNumberField(verbose_name="номер телефона")
     is_active = models.BooleanField(default=True, verbose_name="Статус читателя")
 
-    books = models.ForeignKey(Books,on_delete=models.PROTECT, verbose_name="Книги")
-    is_creation = models.DateField(auto_now_add=True, verbose_name='Дата создания')
-    is_editing = models.DateField(auto_now_add=True, verbose_name='Дата редактирования')
+    books = models.ForeignKey(Books, on_delete=models.PROTECT, verbose_name="Книги")
 
     class Meta:
         verbose_name = "Читатель"
